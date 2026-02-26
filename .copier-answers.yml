@@ -1,0 +1,7 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v0.1.0
+_src_path: gh:npikall/copier-typst-package
+copyright_license: MIT
+git_email: nikolas.pikall@gmail.com
+git_user: npikall
+project: geo-thesis

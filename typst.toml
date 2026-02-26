@@ -1,0 +1,30 @@
+# for a description of available keys, see https://github.com/typst/packages/?tab=readme-ov-file#package-format
+
+[package]
+name = "geo-thesis"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["npikall"]
+license = "MIT"
+description = "Add a little description here"
+repository = "https://github.com/npikall/geo-thesis.git"
+keywords = ["template", "article"]
+categories = ["paper", "report"]
+disciplines = [
+	"biology",
+	"chemistry",
+	"engineering",
+	"geography",
+	"mathematics",
+	"physics",
+]
+compiler = "0.13.0"
+exclude = [".github", "docs", "scripts", "tests", ".typstignore", "Justfile"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
+
+# [tool.mytool]
+# foo = "bar"

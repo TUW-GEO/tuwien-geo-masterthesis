@@ -1,0 +1,13 @@
+#import "@preview/tidy:0.4.3"
+#import "../src/lib.typ"
+
+
+#heading(outlined: false)[geo-thesis]
+#align(center, heading(level: 2, text(black)[v.0.1.0], outlined: false))
+#v(1cm)
+
+#outline(depth: 3)
+#pagebreak()
+
+#let docs = tidy.parse-module(read("../src/lib.typ"))
+#tidy.show-module(docs, style: tidy.styles.default)
