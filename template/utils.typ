@@ -1,4 +1,6 @@
-#import "@preview/glossarium:0.5.10": make-glossary, print-glossary, register-glossary
+#import "@preview/glossarium:0.5.10": (
+  make-glossary, print-glossary, register-glossary,
+)
 #let entry-list = (
   (
     key: "eop",
