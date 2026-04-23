@@ -70,8 +70,7 @@
 
   grid(
     columns: (1fr, 1fr),
-    image("graphics/tuwien_logo.png", height: 2.5cm),
-    align(right, image("graphics/Blue.png", height: 2.5cm)),
+    image("graphics/tuwien_logo.png", height: 2.5cm), align(right, image("graphics/Blue.png", height: 2.5cm)),
   )
 
   v(2cm)
@@ -87,30 +86,30 @@
 
     #text(size: 11pt)[zur Erlangung des akademischen Grades]
 
-    #v(0.8em)
+    #v(0.7em)
 
     #text(size: 14pt, weight: "bold", degree-string)
 
-    #v(0.8em)
+    #v(0.7em)
 
     #text(size: 11pt)[im Rahmen des Studiums]
 
-    #v(0.8em)
+    #v(0.7em)
 
     #text(size: 13pt, weight: "bold", info.study-program)
 
-    #v(0.8em)
+    #v(0.7em)
 
     #text(size: 11pt)[eingereicht von]
 
-    #v(0.8em)
+    #v(0.7em)
 
     #text(size: 13pt, weight: "bold", info.author)
 
     #text(size: 11pt)[Matrikelnummer #info.student-id]
   ]
 
-  v(2cm)
+  v(1.5cm)
 
   [
     ausgeführt am #info.department
