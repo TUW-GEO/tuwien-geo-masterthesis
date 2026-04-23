@@ -40,11 +40,11 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: "1.26"
-      - run: go install github.com/npikall/gotpm@latest
+        run: go install github.com/npikall/gotpm@latest
 
       - name: Build package
         run: |
-          just package out
+          just dist
 
       
       - name: Checkout package registry
@@ -58,10 +58,8 @@ jobs:
         run: |
           PKG_VERSION="$(gotpm bump --show-current)"
           mkdir -p "typst-packages/${{ env.PATH_PREFIX }}/${{ env.PKG_NAME }}"
-          mv "out/local/${{ env.PKG_NAME }}/${PKG_VERSION}" "typst-packages/${{ env.PATH_PREFIX }}/${{ env.PKG_NAME }}"
-          rmdir "out/local/${{ env.PKG_NAME }}"
-          rmdir out/local
-          rmdir out
+          mv "dist" "typst-packages/${{ env.PATH_PREFIX }}/${{ env.PKG_NAME }}"
+          rmdir dist
 
           GIT_USER_NAME="$(git log -1 --pretty=format:'%an')"
           GIT_USER_EMAIL="$(git log -1 --pretty=format:'%ae')"
