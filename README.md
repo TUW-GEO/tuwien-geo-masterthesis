@@ -1,84 +1,94 @@
 # geo-thesis
 
-A short description about the project and/or client.
-
-## Template adaptation checklist
-
-> [!IMPORTANT]
-> This repo uses Justfiles to run task/tools.
-> You will need the following tools installed to run all the recipes:
->
-> - [just] to run the `Justfile Recipes` themselfs
-> - [tytanic] to setup and run tests on your code
-> - [pre-commit] to run the pre-commit hooks (auto formatting your code and other useful things)
-> - [typst-package-check] to run some checks before publishing to the typst universe
-
-- [ ] Fill out `README.md`
-  - Check section contents and/or delete sections that don't apply
-- [ ] Check and/or replace `LICENSE` by something that suits your needs
-- [ ] Fill out `typst.toml`. See also the [typst/packages README]
-- [ ] Adapt Repository URLs in `CHANGELOG.md`
-  - Consider only committing that file with your first release, or removing the "Initial Release" part in the beginning
-- [ ] Adapt or deactivate the release workflow in `.github/workflows/release.yml`
-  - to deactivate it, delete that file or remove/comment out lines 2-4 (`on:` and following)
-  - to use the workflow
-    - [ ] check the values under `env:`, particularly `REGISTRY_REPO`
-    - [ ] if you don't have one, create a [fine-grained personal access token] with [Contents permission] for the `REGISTRY_REPO`
-    - [ ] on this repo, create a secret `REGISTRY_TOKEN` (at `https://github.com/[user]/[repo]/settings/secrets/actions`) that contains the so created token
-
-    if configured correctly, whenever you create a tag `v...`, your package will be pushed onto a branch on the `REGISTRY_REPO`, from which you can then create a pull request against [typst/packages](https://github.com/typst/packages/)
-
-- [ ] remove/replace the example test case
-- [ ] (add your actual code, docs and tests)
-- [ ] remove this section from the README
+Typst thesis template for geography and geoinformation disciplines at TU Wien (Technische Universität Wien). Supports Diplomarbeit, Master's, and Bachelor's theses.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
-
 ```typ
 #import "@preview/geo-thesis:0.1.0": *
 
-#show: my-show-rule.with()
-#my-func()
+#let info = (
+  ..default-info,
+  title: "My Thesis Title",
+  author: "Max Mustermann",
+  student-id: "12345678",
+  supervisor: "Prof. Dr. Supervisor Name",
+)
+
+#show: thesis.with(info: info, lang: "en")
+
+#make-title-page(info)
+#make-declaration(info)
+#make-abstract(
+  en: [English abstract.],
+  de: [Deutsche Kurzfassung.],
+)
+
+#outline()
+= Introduction
+...
 ```
 
-<!-- <picture> -->
-<!--   <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg"> -->
-<!--   <img src="./thumbnail-light.svg"> -->
-<!-- </picture> -->
+## Features
 
-### Installation
+- TU Wien branded title page (logo, blue colour scheme)
+- Bilingual declaration of authorship (German + English)
+- Abstract pages (English + German)
+- Optional acknowledgements page
+- Running header with chapter title, page counter in footer
+- Glossary support via `glossarium`
+- Configurable degree type: `"Diplomarbeit"`, `"Master"`, `"Bachelor"`
 
-A step by step guide that will tell you how to get the development environment up and running. This should explain how to clone the repo and where to (maybe a link to the typst documentation on it), along with any pre-requisite software and installation steps.
+## Template Parameters
 
+### `thesis()`
+
+| Parameter      | Type        | Default                 | Description                   |
+| -------------- | ----------- | ----------------------- | ----------------------------- |
+| `info`         | dict        | `default-info`          | Thesis metadata               |
+| `lang`         | str         | `"de"`                  | Document language             |
+| `eq-numbering` | str or none | `none`                  | Equation numbering pattern    |
+| `main-font`    | array       | New CM Sans, PT Sans, … | Font fallback list            |
+| `page-paper`   | str         | `"a4"`                  | Paper size                    |
+| `page-margins` | dict        | 22/24 mm                | Top/bottom/left/right margins |
+
+### `default-info` fields
+
+| Key             | Default                                       |
+| --------------- | --------------------------------------------- |
+| `title`         | `"Thesis Title"`                              |
+| `author`        | `"Author Name"`                               |
+| `student-id`    | `"00000000"`                                  |
+| `degree`        | `"Diplomarbeit"`                              |
+| `study-program` | `"Geodesy and Geoinformation"`                |
+| `department`    | `"Department of Geodesy and Geoinformation"`  |
+| `faculty`       | `"Faculty of Mathematics and Geoinformation"` |
+| `university`    | `"Technische Universität Wien"`               |
+| `supervisor`    | `"Supervisor Name"`                           |
+| `co-supervisor` | `none`                                        |
+| `cooperation`   | `none`                                        |
+| `location`      | `"Wien"`                                      |
+| `date`          | `datetime.today()`                            |
+
+## Public API
+
+- `default-info` — metadata dict with all fields pre-filled
+- `thesis()` — main show rule
+- `make-title-page(info)` — title page
+- `make-declaration(info)` — authorship declaration
+- `make-abstract(en: [], de: [])` — abstract pages
+- `make-acknowledgements(body)` — optional acknowledgements
+- `tu-blue` — `rgb("#006699")`
+- `forrest-green` — `rgb(0%, 27%, 13%)`
+
+## Development
+
+Requires: `just`, `typst ≥ 0.13.0`, `tt` (tytanic), `gotpm`, `typstyle`, `uvx`.
+
+```bash
+just install   # install as @local/geo-thesis:0.1.0
+just test      # run test suite
+just docs      # compile manual
+just format    # format .typ files
+just ci        # full CI: test + docs + thumbnail + check
 ```
-$ First step
-$ Another step
-$ Final step
-```
-
-## Usage
-
-A more in-depth description of usage. Any template arguments? A complicated example that showcases most if not all of the functions the package provides? This is also an excellent place to signpost the manual.
-
-```typ
-#import "@preview/geo-thesis:0.1.0": *
-
-#let my-complicated-example = ...
-```
-
-## Additional Documentation and Acknowledgments
-
-- Project folder on server:
-- Confluence link:
-- Asana board:
-- etc...
-
-[typst/packages README]: https://github.com/typst/packages/?tab=readme-ov-file#package-format
-[fine-grained personal access token]: https://github.com/settings/tokens?type=beta
-[Contents permission]: https://stackoverflow.com/a/75116350/371191
-[tytanic]: https://github.com/typst-community/tytanic
-[pre-commit]: https://pre-commit.com/
-[just]: https://github.com/casey/just
-[typst-package-check]: https://github.com/typst/package-check
