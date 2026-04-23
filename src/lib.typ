@@ -77,35 +77,20 @@
 
   align(center)[
     #text(size: 14pt, upper(degree-label))
-
-    #v(1.5cm)
-
+    #v(1fr)
     #text(size: 20pt, weight: "bold", info.title)
-
-    #v(1.5cm)
-
+    #v(1fr)
     #text(size: 11pt)[zur Erlangung des akademischen Grades]
-
     #v(0.7em)
-
     #text(size: 14pt, weight: "bold", degree-string)
-
     #v(0.7em)
-
     #text(size: 11pt)[im Rahmen des Studiums]
-
     #v(0.7em)
-
     #text(size: 13pt, weight: "bold", info.study-program)
-
     #v(0.7em)
-
     #text(size: 11pt)[eingereicht von]
-
     #v(0.7em)
-
     #text(size: 13pt, weight: "bold", info.author)
-
     #text(size: 11pt)[Matrikelnummer #info.student-id]
   ]
 
