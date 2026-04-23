@@ -44,7 +44,7 @@
 ///
 /// -> content
 #let make-title-page(
-  /// - info (dictionary): Thesis metadata; use `default-info` as base.
+  /// Thesis metadata; use `default-info` as base.
   /// -> content
   info,
 ) = {
@@ -70,7 +70,8 @@
 
   grid(
     columns: (1fr, 1fr),
-    image("graphics/tuwien_logo.png", height: 2.5cm), align(right, image("graphics/Blue.png", height: 2.5cm)),
+    image("graphics/tuwien_logo.png", height: 2.5cm),
+    align(right, image("graphics/Blue.png", height: 2.5cm)),
   )
 
   v(2cm)
@@ -165,7 +166,7 @@
 ///
 /// -> content
 #let make-declaration(
-  /// - info (dictionary): Thesis metadata. Needs `location`, `date`, `author`.
+  /// Thesis metadata. Needs `location`, `date`, `author`.
   /// -> content
   info,
 ) = {
@@ -220,10 +221,10 @@
 ///
 /// -> content
 #let make-abstract(
-  /// - en (content): English abstract body.
+  /// English abstract body.
   /// -> content
   en: [],
-  /// - de (content): German Kurzfassung body.
+  /// German Kurzfassung body.
   de: [],
   /// -> content
 ) = {
@@ -244,7 +245,7 @@
 ///
 /// -> content
 #let make-acknowledgements(
-  /// - body (content): Acknowledgements text.
+  /// Acknowledgements text.
   /// -> content
   body,
 ) = {
@@ -258,16 +259,16 @@
 
 /// Main thesis show rule. Apply with `#show: thesis.with(info: info)`.
 #let thesis(
-  /// - info (dictionary): Thesis metadata. Use `default-info` as base.
+  /// Thesis metadata. Use `default-info` as base.
   /// -> dict
   info: default-info,
-  /// - lang (str): Document language (`"de"` or `"en"`).
+  /// Document language (`"de"` or `"en"`).
   /// -> str
   lang: "de",
-  /// - eq-numbering (str or none): Equation numbering pattern, e.g. `"(1)"`.
+  /// Equation numbering pattern, e.g. `"(1)"`.
   /// -> str
   eq-numbering: none,
-  /// - main-font (array): Ordered font fallback list.
+  /// Ordered font fallback list.
   /// -> array
   main-font: (
     "New Computer Modern Sans",
@@ -276,10 +277,10 @@
     "DejaVu Sans",
     "Latin Modern Sans",
   ),
-  /// - page-paper (str): Paper size string, default `"a4"`.
+  /// Paper size string, default `"a4"`.
   /// -> str
   page-paper: "a4",
-  /// - page-margins (dictionary): Margin dict with keys `top`, `bottom`, `left`, `right`.
+  /// Margin dict with keys `top`, `bottom`, `left`, `right`.
   /// -> dict
   page-margins: (top: 22mm, bottom: 22mm, left: 24mm, right: 24mm),
   doc,

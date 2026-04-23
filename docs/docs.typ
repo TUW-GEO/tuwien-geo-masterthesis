@@ -90,4 +90,4 @@ Pass `degree` in the `info` dict. Supported values:
 = API Reference
 
 #let docs = tidy.parse-module(read("../src/lib.typ"))
-#tidy.show-module(docs, style: tidy.styles.default)
+#tidy.show-module(docs, style: tidy.styles.default, first-heading-level: 1)
