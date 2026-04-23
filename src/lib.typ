@@ -42,6 +42,7 @@
 
 /// Generate the title page. Call before any other content.
 ///
+/// -> content
 #let make-title-page(
   /// - info (dictionary): Thesis metadata; use `default-info` as base.
   /// -> content
@@ -69,8 +70,7 @@
 
   grid(
     columns: (1fr, 1fr),
-    image("graphics/tuwien_logo.png", height: 2.5cm),
-    align(right, image("graphics/Blue.png", height: 2.5cm)),
+    image("graphics/tuwien_logo.png", height: 2.5cm), align(right, image("graphics/Blue.png", height: 2.5cm)),
   )
 
   v(2cm)
@@ -163,9 +163,12 @@
 
 /// Generate bilingual declaration of authorship (German + English).
 ///
-/// - info (dictionary): Thesis metadata. Needs `location`, `date`, `author`.
 /// -> content
-#let make-declaration(info) = {
+#let make-declaration(
+  /// - info (dictionary): Thesis metadata. Needs `location`, `date`, `author`.
+  /// -> content
+  info,
+) = {
   let date-str = info.date.display("[day].[month].[year]")
 
   set heading(numbering: none, outlined: false)
@@ -215,10 +218,15 @@
 
 /// Generate abstract pages (English Abstract + German Kurzfassung).
 ///
-/// - en (content): English abstract body.
-/// - de (content): German Kurzfassung body.
 /// -> content
-#let make-abstract(en: [], de: []) = {
+#let make-abstract(
+  /// - en (content): English abstract body.
+  /// -> content
+  en: [],
+  /// - de (content): German Kurzfassung body.
+  de: [],
+  /// -> content
+) = {
   set heading(numbering: none, outlined: false)
 
   [= Abstract]
@@ -234,9 +242,12 @@
 
 /// Generate an optional acknowledgements page.
 ///
-/// - body (content): Acknowledgements text.
 /// -> content
-#let make-acknowledgements(body) = {
+#let make-acknowledgements(
+  /// - body (content): Acknowledgements text.
+  /// -> content
+  body,
+) = {
   set heading(numbering: none, outlined: false)
 
   [= Acknowledgements]
@@ -246,18 +257,18 @@
 }
 
 /// Main thesis show rule. Apply with `#show: thesis.with(info: info)`.
-///
-/// - info (dictionary): Thesis metadata. Use `default-info` as base.
-/// - lang (str): Document language (`"de"` or `"en"`).
-/// - eq-numbering (str or none): Equation numbering pattern, e.g. `"(1)"`.
-/// - main-font (array): Ordered font fallback list.
-/// - page-paper (str): Paper size string, default `"a4"`.
-/// - page-margins (dictionary): Margin dict with keys `top`, `bottom`, `left`, `right`.
-/// -> content
 #let thesis(
+  /// - info (dictionary): Thesis metadata. Use `default-info` as base.
+  /// -> dict
   info: default-info,
+  /// - lang (str): Document language (`"de"` or `"en"`).
+  /// -> str
   lang: "de",
+  /// - eq-numbering (str or none): Equation numbering pattern, e.g. `"(1)"`.
+  /// -> str
   eq-numbering: none,
+  /// - main-font (array): Ordered font fallback list.
+  /// -> array
   main-font: (
     "New Computer Modern Sans",
     "PT Sans",
@@ -265,7 +276,11 @@
     "DejaVu Sans",
     "Latin Modern Sans",
   ),
+  /// - page-paper (str): Paper size string, default `"a4"`.
+  /// -> str
   page-paper: "a4",
+  /// - page-margins (dictionary): Margin dict with keys `top`, `bottom`, `left`, `right`.
+  /// -> dict
   page-margins: (top: 22mm, bottom: 22mm, left: 24mm, right: 24mm),
   doc,
 ) = {
