@@ -304,24 +304,6 @@
   set page(
     paper: page-paper,
     margin: page-margins,
-    header: context {
-      let hs = query(heading.where(level: 1, outlined: true).before(here()))
-      if hs.len() > 0 {
-        set text(size: 9pt, fill: tu-blue)
-        align(right, hs.last().body)
-        v(-6pt)
-        line(length: 100%, stroke: 0.5pt + tu-blue)
-      }
-    },
-    footer: context {
-      line(length: 100%, stroke: 0.5pt)
-      v(2pt)
-      set text(size: 9pt)
-      align(
-        right,
-        [#counter(page).display() | #counter(page).final().first()],
-      )
-    },
   )
 
   set text(font: main-font, lang: info.at("lang", default: "de"))
