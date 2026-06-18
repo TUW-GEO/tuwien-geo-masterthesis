@@ -7,13 +7,16 @@
 
 #let info = (
   ..default-info,
-  title: "My Thesis Title",
-  author: "Max Mustermann",
-  student-id: "12345678",
-  supervisor: "Prof. Dr. Supervisor Name",
-  // co-supervisor: "Dr. Co-Supervisor Name",
-  // cooperation: "In cooperation with Some Institution",
-  // degree: "Master",   // "Diplomarbeit" | "Master" | "Bachelor"
+  lang: "de", // "de" | "en"
+  title: "Master Thesis Title",
+  author: "Martina Müller",
+  student-id: "01234567",
+  faculty: "Fakultät für Mathematik und Geoinformation",
+  supervisor: "Title Dr. Name Surname",
+  co-supervisor: "Univ.-Ass. Dr. Name Surname",
+  cooperation: "(in Zusammenarbeit mit XYZ)",
+  // degree: "Master",             // "Diplomarbeit" | "Master" | "Bachelor"
+  // thesis-type-label: "CUSTOM",  // override computed degree label
 )
 
 #show: thesis.with(info: info)
