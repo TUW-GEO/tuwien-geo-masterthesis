@@ -16,6 +16,7 @@
   supervisor: "Title Dr. Name Surname",
   co-supervisor: "Univ.-Ass. Dr. Name Surname",
   cooperation: "(in Zusammenarbeit mit XYZ)",
+  eq-numbering: "(1)",
   // degree: "Master",             // "Diplomarbeit" | "Master" | "Bachelor"
   // thesis-type-label: "CUSTOM",  // override computed degree label
 )
@@ -87,11 +88,17 @@ Reference to @tab-example. Tables are automatically positioned by Typst.
 
 === Mathematical formulas
 Mathematical formulas may appear directly within a sentence, for example
-$sum_(k=1)^(infinity) 1 / k^2 = pi/2$, or they can be displayed separately from the
-surrounding text as
+$sum_(k=1)^(infinity) 1 / k^2 = pi/2$, or they can be displayed separately from
+the surrounding text as
 $
   sum_(k=1)^infinity 1/k^2 = pi / 2
 $
+
+Alternatively, the expression may be presented as a numbered equation:
+#set math.equation(numbering:"(1)")
+$
+  sum_(k=1)^infinity 1/k^2 = pi / 6
+$ <eq-basel>
 
 === Hyperlink
 Webpage of #link("https://www.tuwien.at/", "TU Wien")
