@@ -318,7 +318,11 @@
   }
 
   show outline.entry.where(level: 1): it => strong(it)
-  show outline: set text(fill: tu-blue)
+  show outline: it => {
+    show heading: set text(fill: black)
+    set text(fill: tu-blue)
+    it
+  }
   show link: set text(fill: tu-blue)
   show cite: set text(fill: forrest-green)
 
