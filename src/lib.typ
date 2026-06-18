@@ -312,6 +312,7 @@
 
   show heading: set block(below: 1em)
   show heading.where(level: 1, outlined: true): it => {
+    set block(below: 2em, above: 4em)
     pagebreak(weak: true)
     it
   }
