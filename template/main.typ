@@ -3,6 +3,7 @@
  */
 
 #import "@local/geo-thesis:0.1.0": *
+#import "@preview/rubber-article:0.5.2": ctable
 #import "utils.typ": *
 
 #let info = (
@@ -58,30 +59,36 @@ in the `entry-list` in `utils.typ`. Only those acronyms explicitly referenced in
 the text will appear in the list of abbreviations.
 
 === Table
-Reference to @tab-data. Tables are automatically positioned by Typst.
+Reference to @tab-example. Tables are automatically positioned by Typst.
 
 #figure(
-  table(
-    columns: 6,
-    [Example], [A], [B], [C], [D], [E],
-    [A], [8.42], [217.15], [0.64], [3.12], [61.33],
-    [B], [3.15], [2.88], [0.41], [0.92], [8.45],
-  ),
-  caption: [Caption of the template],
-)<tab-data>
+  text(size: 0.85em, ctable(
+    cols: "|c|ccccccc|ccc|c|",
+    header-rows: 2,
+    [*Example 1*], table.cell(colspan: 7, align: left)[*Example 2*], table.cell(colspan: 3, align: left)[*Example 3*], [*Example 4*],
+    [], [A], [B], [C], [D], [E], [F], [G], [H], [I], [J], [K],
+    [A], [8,42], [217,15], [0,64], [3,12], [42,09], [61,33], [14,25], [22,04], [28,17], [11,05], [31,44],
+    [B], [3,15], [2,88], [0,41], [0,92], [3,56], [2,14], [11,80], [2,55], [4,21], [6,73], [14,02],
+    [C], [0,85], [1,20], [1,58], [0,44], [1,92], [1,11], [8,45], [3,67], [6,02], [8,14], [19,25],
+    table.hline(),
+    [D], [0,67], [2,45], [0,91], [0,55], [1,38], [0,29], [5,12], [7,81], [4,03], [10,44], [13,20],
+    [E], [1,12], [0,45], [2,03], [0,15], [0,25], [0,08], [3,54], [2,31], [3,44], [5,18], [8,62],
+  )),
+  caption: [Caption of the table.],
+)<tab-example>
 
 === Figure
-@fig-logo shows the TU Wien Logo. Figures are automatically positioned by Typst.
+@fig-tu-logo shows the TU Wien logo. Figures are automatically positioned by Typst.
 
 #figure(
-  rect(align([Image of the TU Wien Logo], horizon), height: 3cm),
-  caption: [TU Wien Logo],
-)<fig-logo>
+  rect(align([Image of the TU Wien Logo], horizon), width: 40%, height: 3cm),
+  caption: [TU Wien logo.],
+)<fig-tu-logo>
 
 === Mathematical formulas
 Mathematical formulas may appear directly within a sentence, for example
-$sum_(k=1)^(infinity) 1 / k^2 = pi/2$, or they can be displayed separately:
-
+$sum_(k=1)^(infinity) 1 / k^2 = pi/2$, or they can be displayed separately from the
+surrounding text as
 $
   sum_(k=1)^infinity 1/k^2 = pi / 2
 $
