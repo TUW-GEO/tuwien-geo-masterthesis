@@ -16,7 +16,7 @@
   // degree: "Master",   // "Diplomarbeit" | "Master" | "Bachelor"
 )
 
-#show: thesis.with(info: info, lang: "en")
+#show: thesis.with(info: info)
 #register-glossary(entry-list)
 #show: make-glossary
 

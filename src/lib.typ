@@ -15,6 +15,8 @@
 /// - `author` (str): Author full name.
 /// - `student-id` (str): Matriculation number.
 /// - `degree` (str): `"Diplomarbeit"`, `"Master"`, or `"Bachelor"`.
+/// - `lang` (str): Document language (`"de"` or `"en"`); affects title page labels.
+/// - `thesis-type-label` (str or none): Override the computed degree label on the title page; computed from `degree` × `lang` if `none`.
 /// - `study-program` (str): Study programme name.
 /// - `department` (str): Department name.
 /// - `faculty` (str): Faculty name.
@@ -29,6 +31,8 @@
   author: "Author Name",
   student-id: "00000000",
   degree: "Diplomarbeit",
+  lang: "de",
+  thesis-type-label: none,
   study-program: "Geodesy and Geoinformation",
   department: "Department of Geodesy and Geoinformation",
   faculty: "Faculty of Mathematics and Geoinformation",
@@ -48,10 +52,15 @@
   /// -> content
   info,
 ) = {
-  let degree-label = if info.degree == "Master" {
-    "MASTER'S THESIS"
+  let lang = info.at("lang", default: "de")
+  let is-en = lang == "en"
+
+  let degree-label = if info.at("thesis-type-label", default: none) != none {
+    info.thesis-type-label
+  } else if info.degree == "Master" {
+    if is-en { "MASTER'S THESIS" } else { "MASTERARBEIT" }
   } else if info.degree == "Bachelor" {
-    "BACHELOR'S THESIS"
+    if is-en { "BACHELOR'S THESIS" } else { "BACHELORARBEIT" }
   } else {
     "DIPLOMARBEIT"
   }
@@ -66,11 +75,44 @@
 
   let date-str = info.date.display("[day].[month].[year]")
 
+  let t = if is-en {
+    (
+      for-degree: "in partial fulfilment of the requirements for the degree of",
+      within: "within the programme",
+      submitted: "submitted by",
+      student-id: "Student ID",
+      conducted: "conducted at the",
+      of-faculty: "of the",
+      at-uni: "of",
+      supervision: "Supervision",
+      supervisor: "Supervisor:",
+      co-supervisor: "Co-Supervisor:",
+      sig-author: "(Signature Author)",
+      sig-supervisor: "(Signature Supervisor)",
+    )
+  } else {
+    (
+      for-degree: "zur Erlangung des akademischen Grades",
+      within: "im Rahmen des Studiums",
+      submitted: "eingereicht von",
+      student-id: "Matrikelnummer",
+      conducted: "ausgeführt am",
+      of-faculty: "der",
+      at-uni: "der",
+      supervision: "Betreuung",
+      supervisor: "Betreuer/in:",
+      co-supervisor: "Mitwirkung:",
+      sig-author: "(Unterschrift Verfasser/in)",
+      sig-supervisor: "(Unterschrift Betreuer/in)",
+    )
+  }
+
   set page(header: none, footer: none, numbering: none)
 
   grid(
     columns: (1fr, 1fr),
-    image("graphics/tuwien_logo.png", height: 2.5cm), align(right, image("graphics/Blue.png", height: 2.5cm)),
+    image("graphics/tuwien_logo.png", height: 2.5cm),
+    align(right, image("graphics/Blue.png", height: 2.5cm)),
   )
 
   v(2cm)
@@ -80,26 +122,27 @@
     #v(1fr)
     #text(size: 20pt, weight: "bold", info.title)
     #v(1fr)
-    #text(size: 11pt)[zur Erlangung des akademischen Grades]
+    #text(size: 11pt)[#t.for-degree]
     #v(0.7em)
     #text(size: 14pt, weight: "bold", degree-string)
     #v(0.7em)
-    #text(size: 11pt)[im Rahmen des Studiums]
+    #text(size: 11pt)[#t.within]
     #v(0.7em)
     #text(size: 13pt, weight: "bold", info.study-program)
     #v(0.7em)
-    #text(size: 11pt)[eingereicht von]
+    #text(size: 11pt)[#t.submitted]
     #v(0.7em)
     #text(size: 13pt, weight: "bold", info.author)
-    #text(size: 11pt)[Matrikelnummer #info.student-id]
+    #linebreak()
+    #text(size: 11pt)[#t.student-id #info.student-id]
   ]
 
   v(1.5cm)
 
   [
-    ausgeführt am #info.department
+    #t.conducted #info.department
 
-    der #info.faculty der #info.university
+    #t.of-faculty #info.faculty #t.at-uni #info.university
   ]
 
   if info.cooperation != none {
@@ -109,38 +152,31 @@
 
   v(1cm)
 
-  [Betreuung
+  [#t.supervision
 
-    Betreuer/in: #info.supervisor]
+    #t.supervisor #info.supervisor]
 
   if info.co-supervisor != none {
     [
 
-      Mitwirkung: #info.co-supervisor]
+      #t.co-supervisor #info.co-supervisor]
   }
 
   v(1.5cm)
 
   grid(
     columns: (1fr, 5cm, 1cm, 5cm),
-    align(left + horizon)[#info.location, #date-str],
-    align(
-      center,
-      stack(
-        spacing: 2pt,
-        line(length: 100%),
-        text(size: 9pt)[(Unterschrift Verfasser/in)],
-      ),
-    ),
+    rows: (auto, auto),
+    row-gutter: 2pt,
+    align(left + bottom)[#info.location, #date-str],
+    align(center + bottom, line(length: 100%)),
     [],
-    align(
-      center,
-      stack(
-        spacing: 2pt,
-        line(length: 100%),
-        text(size: 9pt)[(Unterschrift Betreuer/in)],
-      ),
-    ),
+    align(center + bottom, line(length: 100%)),
+
+    [],
+    align(center, text(size: 9pt)[#t.sig-author]),
+    [],
+    align(center, text(size: 9pt)[#t.sig-supervisor]),
   )
 
   pagebreak()
@@ -243,12 +279,9 @@
 
 /// Main thesis show rule. Apply with `#show: thesis.with(info: info)`.
 #let thesis(
-  /// Thesis metadata. Use `default-info` as base.
+  /// Thesis metadata. Use `default-info` as base. Language is read from `info.lang`.
   /// -> dict
   info: default-info,
-  /// Document language (`"de"` or `"en"`).
-  /// -> str
-  lang: "de",
   /// Equation numbering pattern, e.g. `"(1)"`.
   /// -> str
   eq-numbering: none,
@@ -256,7 +289,6 @@
   /// -> array
   main-font: (
     "New Computer Modern Sans",
-    "PT Sans",
     "Liberation Sans",
     "DejaVu Sans",
     "Latin Modern Sans",
@@ -292,9 +324,15 @@
     },
   )
 
-  set text(font: main-font, lang: lang)
+  set text(font: main-font, lang: info.at("lang", default: "de"))
   set heading(numbering: "1.1 ")
   set math.equation(numbering: eq-numbering)
+
+  show heading: set block(below: 1em)
+  show heading.where(level: 1, outlined: true): it => {
+    pagebreak(weak: true)
+    it
+  }
 
   show outline.entry.where(level: 1): it => strong(it)
   show outline: set text(fill: tu-blue)
