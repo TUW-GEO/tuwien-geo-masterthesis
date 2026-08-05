@@ -59,6 +59,19 @@ gh_install() {
     find "${tmp}" -name "$bin" -type f -exec install -m755 {} "${INSTALL_DIR}/${bin}" \;
 }
 
+# Run a GitHub release's install.sh via curl | sh.
+# Usage: curl_install <url>
+curl_install() {
+    curl -fsSL "$1" | sh
+}
+
+# go install a module into INSTALL_DIR, if go is available.
+# Usage: go_install <module-path@version>
+go_install() {
+    is_installed go || return 1
+    GOBIN="${INSTALL_DIR}" go install "$1"
+}
+
 # Try cargo-binstall, then cargo, then a fallback function.
 # Usage: try_install <binary> <crate-or-empty> <fallback-fn-or-empty>
 try_install() {
@@ -91,7 +104,7 @@ try_install() {
 # --- Fallback installers ---
 
 _install_uv() {
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    curl_install "https://astral.sh/uv/install.sh"
 }
 
 _install_just() {
@@ -115,8 +128,10 @@ _install_tt() {
 }
 
 _install_gotpm() {
-    gh_install "npikall/gotpm" "gotpm" \
-        "https://github.com/npikall/gotpm/releases/download/{tag}/gotpm-{target}.tar.gz"
+    if curl_install "https://github.com/npikall/gotpm/releases/latest/download/install.sh"; then
+        return 0
+    fi
+    go_install "github.com/npikall/gotpm@latest"
 }
 
 _install_tpc() {
@@ -131,7 +146,7 @@ try_install "typstyle"            "typstyle"             "_install_typstyle"
 try_install "just"                "just"                 "_install_just"
 try_install "uv"                  ""                     "_install_uv"
 try_install "tt"                  "tytanic"              "_install_tt"
-try_install "gotpm"               "gotpm"                "_install_gotpm"
+try_install "gotpm"               ""                     "_install_gotpm"
 try_install "typst-package-check" "typst-package-check"  "_install_tpc"
 
 echo ""
