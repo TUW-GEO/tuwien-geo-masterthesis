@@ -1,11 +1,11 @@
-# geo-thesis
+# tuwien-geo-masterthesis
 
 Typst thesis template for geography and geoinformation disciplines at TU Wien (Technische Universität Wien). Supports Diplomarbeit, Master's, and Bachelor's theses.
 
 ## Getting Started
 
 ```typ
-#import "@preview/geo-thesis:0.1.0": *
+#import "@preview/tuwien-geo-masterthesis:0.1.0": *
 
 #let info = (
   ..default-info,
@@ -86,7 +86,7 @@ Typst thesis template for geography and geoinformation disciplines at TU Wien (T
 Requires: `just`, `typst ≥ 0.13.0`, `tt` (tytanic), `gotpm`, `typstyle`, `uvx`.
 
 ```bash
-just install   # install as @local/geo-thesis:0.1.0
+just install   # install as @local/tuwien-geo-masterthesis:0.1.0
 just test      # run test suite
 just docs      # compile manual
 just format    # format .typ files

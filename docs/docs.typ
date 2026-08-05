@@ -11,7 +11,7 @@
 #show: codly-init.with()
 #codly(languages: codly-languages)
 
-#heading(outlined: false)[geo-thesis]
+#heading(outlined: false)[tuwien-geo-masterthesis]
 #align(center, heading(level: 2, text(black)[v.0.1.0], outlined: false))
 #v(1cm)
 
@@ -19,12 +19,15 @@
 
 = Introduction
 
-`geo-thesis` is a Typst thesis template for the Department of Geodesy and Geoinformation at TU Wien. It provides a ready-to-use document structure with title page, front matter, branded headers/footers, and a glossary.
+`tuwien-geo-masterthesis` is a Typst thesis template for the Department of
+Geodesy and Geoinformation at TU Wien. It provides a ready-to-use document
+structure with title page, front matter, branded headers/footers, and a
+glossary.
 
 == Quick Start
 
 ```typ
-#import "@preview/geo-thesis:0.1.0": *
+#import "@preview/tuwien-geo-masterthesis:0.1.0": *
 #import "utils.typ": *           // glossary entry list
 
 #let info = (
@@ -57,7 +60,8 @@
 
 == Metadata
 
-All thesis-specific data is collected in a single dictionary and passed to each function. Start from `default-info` and override only the fields you need:
+All thesis-specific data is collected in a single dictionary and passed to each
+function. Start from `default-info` and override only the fields you need:
 
 ```typ
 #let info = (..default-info, title: "...", author: "...")
@@ -69,14 +73,17 @@ See `default-info` below for all available fields and their defaults.
 
 The expected call order is:
 
-+ `#show: thesis.with(info: info)` — apply global layout (page, fonts, header/footer)
++ `#show: thesis.with(info: info)` — apply global layout (page, fonts,
+  header/footer)
 + `#make-title-page(info)` — TU Wien title page with bundled logos
 + `#make-declaration(info)` — bilingual statutory declaration (DE + EN)
 + `#make-abstract(en: [...], de: [...])` — Abstract and Kurzfassung
 + `#make-acknowledgements[...]` — optional acknowledgements
-+ `#outline()` — table of contents; add further `#outline(target: ...)` for LoF/LoT
++ `#outline()` — table of contents; add further `#outline(target: ...)` for
+  LoF/LoT
 + Main chapters with numbered `=` headings
-+ Back matter: bibliography, AI usage, abbreviations (`#print-glossary`), appendix
++ Back matter: bibliography, AI usage, abbreviations (`#print-glossary`),
+  appendix
 
 == Degree Types
 

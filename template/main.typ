@@ -1,8 +1,8 @@
 /*
- * geo-thesis
+ * tuwien-geo-masterthesis
  */
 
-#import "@local/geo-thesis:0.1.0": *
+#import "@local/tuwien-geo-masterthesis:0.1.0": *
 #import "@preview/rubber-article:0.5.2": ctable
 #import "utils.typ": *
 

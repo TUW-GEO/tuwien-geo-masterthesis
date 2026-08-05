@@ -1,3 +1,3 @@
 #import "../src/lib.typ": *
 
-= geo-thesis
+= tuwien-geo-masterthesis
