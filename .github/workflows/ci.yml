@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Install just and tytanic
         uses: taiki-e/install-action@4bfc3ae48d7b486e7d7753d6501ae2a8eb40903a # zola
