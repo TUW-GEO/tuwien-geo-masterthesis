@@ -69,7 +69,7 @@ uninstall-preview *args:
     gotpm uninstall -n preview {{ args }}
 
 # publish a package to the typst universe
-publish *args:
+publish *args: thumbnail
     gotpm publish {{ args }}
 
 # package the library into the specified destination folder
