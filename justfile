@@ -107,6 +107,5 @@ release target: test check
     @just _ensure_clean
     @just _bump {{ target }}
     @just changelog
-    @just docs
     @just _commit_and_tag
     @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
