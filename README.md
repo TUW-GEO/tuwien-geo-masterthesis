@@ -1,6 +1,8 @@
-# tuwien-geo-masterthesis
+# The `tuwien-geo-masterthesis` Package
 
-Typst thesis template for the Geo Department at TU Wien (Technische Universität Wien). Supports Diplomarbeit, Master's, and Bachelor's theses.
+[![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FTUW-GEO%2Ftuwien-geo-masterthesis%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=template&color=239DAD)](https://typst.app/universe/package/tuwien-geo-masterthesis) [![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/TUW-GEO/tuwien-geo-masterthesis/blob/main/LICENSE) [![Test Status](https://github.com/TUW-GEO/tuwien-geo-masterthesis/actions/workflows/ci.yml/badge.svg)](https://github.com/TUW-GEO/tuwien-geo-masterthesis/actions/workflows/ci.yml)
+
+*"The official template for Mastertheses at the Geo Department of TU Wien."*
 
 ## Getting Started
 
@@ -23,6 +25,7 @@ Typst thesis template for the Geo Department at TU Wien (Technische Universität
   en: [English abstract.],
   de: [Deutsche Kurzfassung.],
 )
+// #make-acknowledgements([Thanks to ...])  // optional
 
 #outline()
 = Introduction
@@ -39,56 +42,32 @@ Typst thesis template for the Geo Department at TU Wien (Technische Universität
 - Glossary support via `glossarium`
 - Configurable degree type: `"Diplomarbeit"`, `"Master"`, `"Bachelor"`
 
-## Template Parameters
+## Customization Options
 
-### `thesis()`
+Key parameters available:
 
-| Parameter      | Type        | Default                 | Description                   |
-| -------------- | ----------- | ----------------------- | ----------------------------- |
-| `info`         | dict        | `default-info`          | Thesis metadata               |
-| `lang`         | str         | `"de"`                  | Document language             |
-| `eq-numbering` | str or none | `none`                  | Equation numbering pattern    |
-| `main-font`    | array       | New CM Sans, PT Sans, … | Font fallback list            |
-| `page-paper`   | str         | `"a4"`                  | Paper size                    |
-| `page-margins` | dict        | 22/24 mm                | Top/bottom/left/right margins |
+```typ
+#show: thesis.with(
+  info: default-info,
+  lang: "de",
+  eq-numbering: "(1.1)",
+  main-font: ("New Computer Modern Sans", "PT Sans"),
+  page-paper: "a4",
+  page-margins: (top: 22mm, bottom: 22mm, left: 24mm, right: 24mm),
+)
+```
 
-### `default-info` fields
+`default-info` covers `title`, `author`, `student-id`, `degree`, `study-program`, `department`, `faculty`, `university`, `supervisor`, `co-supervisor`, `cooperation`, `location`, and `date` — see [the manual PDF](https://github.com/TUW-GEO/tuwien-geo-masterthesis/releases/latest/download/tuwien-geo-masterthesis-manual.pdf) for the full reference. The package also exports the colours `tu-blue` (`rgb("#006699")`) and `forrest-green` (`rgb(0%, 27%, 13%)`).
 
-| Key             | Default                                       |
-| --------------- | --------------------------------------------- |
-| `title`         | `"Thesis Title"`                              |
-| `author`        | `"Author Name"`                               |
-| `student-id`    | `"00000000"`                                  |
-| `degree`        | `"Diplomarbeit"`                              |
-| `study-program` | `"Geodesy and Geoinformation"`                |
-| `department`    | `"Department of Geodesy and Geoinformation"`  |
-| `faculty`       | `"Faculty of Mathematics and Geoinformation"` |
-| `university`    | `"Technische Universität Wien"`               |
-| `supervisor`    | `"Supervisor Name"`                           |
-| `co-supervisor` | `none`                                        |
-| `cooperation`   | `none`                                        |
-| `location`      | `"Wien"`                                      |
-| `date`          | `datetime.today()`                            |
+## Contributing
 
-## Public API
+Contributions are welcome via the [GitHub repository](https://github.com/TUW-GEO/tuwien-geo-masterthesis).
 
-- `default-info` — metadata dict with all fields pre-filled
-- `thesis()` — main show rule
-- `make-title-page(info)` — title page
-- `make-declaration(info)` — authorship declaration
-- `make-abstract(en: [], de: [])` — abstract pages
-- `make-acknowledgements(body)` — optional acknowledgements
-- `tu-blue` — `rgb("#006699")`
-- `forrest-green` — `rgb(0%, 27%, 13%)`
+## Local Installation
 
-## Development
-
-Requires: `just`, `typst ≥ 0.14.0`, `tt` (tytanic), `gotpm`, `typstyle`, `uvx`.
+Local install is handled by [`gotpm`](https://github.com/npikall/gotpm):
 
 ```bash
-just install   # install as @local/tuwien-geo-masterthesis:0.1.0
-just test      # run test suite
-just docs      # compile manual
-just format    # format .typ files
-just ci        # full CI: test + docs + thumbnail + check
+gotpm install            # install as @local/tuwien-geo-masterthesis:0.1.0
+gotpm install -n preview # install as @preview/tuwien-geo-masterthesis:0.1.0
 ```
