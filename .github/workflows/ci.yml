@@ -26,22 +26,22 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install just and tytanic
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4bfc3ae48d7b486e7d7753d6501ae2a8eb40903a # zola
         with:
           tool: just,tytanic@${{ matrix.typst-version.tytanic }}
 
       - name: Setup Go and gotpm
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version: "1.26"
       - run: go install github.com/npikall/gotpm@latest
 
       - name: Setup typst
         id: setup-typst
-        uses: typst-community/setup-typst@v3
+        uses: typst-community/setup-typst@40d32bb6ccb235bd7f5164cb47cfd40a5ea3a314 # v5.2.0
         with:
           typst-version: ${{ matrix.typst-version.typst }}
 
