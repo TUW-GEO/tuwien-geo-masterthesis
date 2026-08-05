@@ -34,7 +34,7 @@ docs:
 
 # generate the thumbnail
 thumbnail:
-    typst compile docs/thumbnail.typ thumbnail.png
+    typst compile docs/thumbnail.typ thumbnail.png --pages=1
 
 # compile the template
 template:
