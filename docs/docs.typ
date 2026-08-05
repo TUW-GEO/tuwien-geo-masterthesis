@@ -11,8 +11,14 @@
 #show: codly-init.with()
 #codly(languages: codly-languages)
 
+#let manifest = toml("../typst.toml")
+
 #heading(outlined: false)[tuwien-geo-masterthesis]
-#align(center, heading(level: 2, text(black)[v.0.1.0], outlined: false))
+#align(center, heading(
+  level: 2,
+  text(black)[v.#manifest.package.version],
+  outlined: false,
+))
 #v(1cm)
 
 #outline(depth: 3)
