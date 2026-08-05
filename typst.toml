@@ -1,26 +1,18 @@
 [package]
-name = "tuwien-geo-masterthesis"
-version = "0.1.0"
-entrypoint = "src/lib.typ"
-authors = ["Niko Pikall"]
-license = "MIT"
-description = "The official template for Mastertheses at the Geo Department of TU Wien."
-repository = "https://github.com/TUW-GEO/tuwien-geo-masterthesis.git"
-keywords = ["template", "article"]
-categories = ["thesis"]
-disciplines = [
-	"biology",
-	"chemistry",
-	"computer-science",
-	"engineering",
-	"geography",
-	"mathematics",
-	"physics",
-]
-compiler = "0.14.0"
-exclude = [".github", "docs", "scripts", "tests", ".typstignore", "Justfile"]
+  authors = ["Niko Pikall"]
+  categories = ["thesis"]
+  compiler = "0.14.0"
+  description = "The official template for Mastertheses at the Geo Department of TU Wien."
+  disciplines = ["computer-science", "engineering", "geography", "mathematics", "physics"]
+  entrypoint = "src/lib.typ"
+  exclude = [".github", "docs", "scripts", "tests", ".typstignore", "Justfile"]
+  keywords = ["template", "article"]
+  license = "MIT"
+  name = "tuwien-geo-masterthesis"
+  repository = "https://github.com/TUW-GEO/tuwien-geo-masterthesis.git"
+  version = "0.1.0"
 
 [template]
-path = "template"
-entrypoint = "main.typ"
-thumbnail = "thumbnail.png"
+  entrypoint = "main.typ"
+  path = "template"
+  thumbnail = "thumbnail.png"
