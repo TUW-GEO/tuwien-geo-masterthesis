@@ -100,7 +100,7 @@ changelog version=`gotpm bump -c`:
 _commit_and_tag version=`gotpm bump --show-current`:
     git add .
     git commit -m "chore(release): bumped version to {{ version }}"
-    git tag -a "v{{ version }}"
+    git tag -a "v{{ version }}" -m "v{{ version }}"
 
 # make a new release [target:<major|minor|patch> or semver]
 release target: test check
