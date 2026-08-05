@@ -45,5 +45,10 @@ jobs:
         with:
           typst-version: ${{ matrix.typst-version.typst }}
 
+      - name: Install Library into local and preview
+        run: |
+          gotpm install
+          gotpm install -n preview
+
       - name: Run test suite
         run: just ci
