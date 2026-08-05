@@ -77,7 +77,7 @@ dist target="dist":
     GOTPM_INSTALL_DIR="{{ target }}" gotpm install
 
 # run typst package checker
-check:
+check: thumbnail
     just dist
     -typst-package-check check dist
     rm -rf dist
