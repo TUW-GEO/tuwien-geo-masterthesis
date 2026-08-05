@@ -61,7 +61,7 @@ Key parameters available:
 
 ## Contributing
 
-Contributions are welcome via the [GitHub repository](https://github.com/TUW-GEO/tuwien-geo-masterthesis).
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for setup, style, and release process.
 
 ## Local Installation
 
