@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2026 npikall
- */
-
 // TU Wien institutional blue.
 #let tu-blue = rgb("#006699")
 
