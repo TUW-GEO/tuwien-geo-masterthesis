@@ -14,6 +14,10 @@ justfile
 # PDF manuals should be included so that they can be linked, but not their sources
 docs/*
 .gitignore
+.devbox
+devbox.json
+devbox.lock
+nix
 .pre-commit-config.yaml
 .copier-answers.yml
 CHANGELOG.md

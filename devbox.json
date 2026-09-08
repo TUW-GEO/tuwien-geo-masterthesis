@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.18.0/.schema/devbox.schema.json",
+  "packages": [
+    "just@latest",
+    "typst@latest",
+    "typstyle@latest",
+    "uv@latest",
+    "newcomputermodern@latest",
+    "liberation_ttf@latest",
+    "dejavu_fonts@latest",
+    "lmodern@latest",
+    "path:./nix#gotpm",
+    "path:./nix#tytanic",
+    "path:./nix#typst-package-check"
+  ],
+  "shell": {
+    "init_hook": [
+      "export TYPST_ROOT=\"$PWD\"",
+      "export TYPST_FONT_PATHS=\"$DEVBOX_PACKAGES_DIR/share/fonts:$DEVBOX_PACKAGES_DIR/texmf-dist/fonts\""
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}
