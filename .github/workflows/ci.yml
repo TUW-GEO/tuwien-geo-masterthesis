@@ -5,6 +5,12 @@ on:
   pull_request:
     branches: [main, dev]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
 jobs:
   tests:
     strategy:
@@ -34,7 +40,7 @@ jobs:
       - name: Setup Go and gotpm
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version: "1.26"
+          go-version: "1.27"
           cache: true
       - run: go install github.com/npikall/gotpm@latest
 
