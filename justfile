@@ -34,11 +34,11 @@ docs:
 
 # generate the thumbnail
 thumbnail:
-    typst compile docs/thumbnail.typ thumbnail.png --pages=1
+    typst compile --creation-timestamp=0 docs/thumbnail.typ thumbnail.png --pages=1
 
 # compile the template
 template:
-    typst compile template/main.typ
+    typst compile --creation-timestamp=0 template/main.typ
 
 # format the .typ files
 format:
@@ -108,4 +108,4 @@ release target: test check
     @just _bump {{ target }}
     @just changelog
     @just _commit_and_tag
-    @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
+    @echo "{{ GREEN }}{{ BOLD }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
