@@ -13,6 +13,8 @@
   co-supervisor: "Univ.-Ass. Dr. Name Surname",
   cooperation: "(in Zusammenarbeit mit XYZ)",
   eq-numbering: "(1)",
+  logo-left: [],
+  logo-right: [],
   // degree: "Master",             // "Diplomarbeit" | "Master" | "Bachelor"
   // thesis-type-label: "CUSTOM",  // override computed degree label
 )

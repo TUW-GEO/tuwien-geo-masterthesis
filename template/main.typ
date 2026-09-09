@@ -17,6 +17,12 @@
   co-supervisor: "Univ.-Ass. Dr. Name Surname",
   cooperation: "(in Zusammenarbeit mit XYZ)",
   eq-numbering: "(1)",
+
+  // if you are affiliated with TU Wien insert the TU Wien and Department Logos
+  // https://www.tuwien.at/mg/geo/downloads/logo
+  logo-left: [], // image("path/to/tu-wien-logo.svg", height: 2.5cm),
+  logo-right: [], // image("path/to/department-logo.svg", height: 2.5cm),
+
   // degree: "Master",             // "Diplomarbeit" | "Master" | "Bachelor"
   // thesis-type-label: "CUSTOM",  // override computed degree label
 )
